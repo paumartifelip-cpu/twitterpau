@@ -46,6 +46,16 @@ const deletePost = async (postId) => {
     else router(); // Recargar
 };
 
+const toggleFeatured = async (postId, currentValue) => {
+    const { error } = await _supabase
+        .from('posts')
+        .update({ is_featured: !currentValue })
+        .eq('id', postId);
+
+    if (error) alert('Error al destacar: ' + error.message);
+    else router();
+};
+
 const toggleLike = async (postId) => {
     // Primero vemos si ya tiene like
     const { data: existingLike } = await _supabase
@@ -96,11 +106,12 @@ const renderFeed = async () => {
         const time = new Date(post.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
         const hasLiked = post.likes.some(l => l.device_id === deviceId);
         const isAuthor = post.author_id === deviceId;
+        const isFeatured = post.is_featured;
 
         return `
-            <div class="post-card glass">
+            <div class="post-card glass ${isFeatured ? 'featured' : ''}">
                 <div class="post-header">
-                    <span class="author-name">@${post.author_id.slice(-5)} ${isAuthor ? '(Tú)' : ''}</span>
+                    <span class="author-name">@${post.author_id.slice(-5)} ${isAuthor ? '(Tú)' : ''} ${isFeatured ? '⭐' : ''}</span>
                     <span class="post-time">${date} ${time}</span>
                 </div>
                 <div class="post-content">${post.content}</div>
@@ -109,6 +120,9 @@ const renderFeed = async () => {
                         ${hasLiked ? '❤️' : '🤍'} ${post.likes.length}
                     </button>
                     ${isAuthor ? `
+                        <button class="btn-action btn-feature ${isFeatured ? 'active' : ''}" onclick="toggleFeatured('${post.id}', ${isFeatured})">
+                            ${isFeatured ? '⭐ Quitar' : '☆ Destacar'}
+                        </button>
                         <button class="btn-action btn-delete" onclick="deletePost('${post.id}')">
                             🗑️ Borrar
                         </button>
@@ -176,3 +190,4 @@ document.querySelector('.bottom-nav').classList.add('glass');
 // Hacer funciones globales para onclick
 window.toggleLike = toggleLike;
 window.deletePost = deletePost;
+window.toggleFeatured = toggleFeatured;

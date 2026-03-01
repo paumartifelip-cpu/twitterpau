@@ -133,6 +133,33 @@ body {
     color: #ef4444;
 }
 
+.btn-feature {
+    color: var(--text-muted);
+}
+
+.btn-feature.active {
+    color: #d97706;
+}
+
+.btn-feature:hover {
+    color: #d97706;
+}
+
+/* Post Destacado */
+.post-card.featured {
+    background: linear-gradient(135deg, rgba(254, 243, 199, 0.85), rgba(253, 230, 138, 0.7));
+    border: 1px solid rgba(245, 158, 11, 0.4);
+    box-shadow: 0 4px 20px rgba(245, 158, 11, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.post-card.featured .post-content {
+    color: #78350f;
+}
+
+.post-card.featured .author-name {
+    color: #92400e;
+}
+
 /* Form Styles */
 .form-container {
     padding: 1rem;
