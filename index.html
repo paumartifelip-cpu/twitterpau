@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>[TWITTTER PAU]</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="app">
+        <!-- El contenido cambiará según la navegación por # hash -->
+        <header class="header-glass">
+            <h1 id="page-title">[TWITTTER PAU]</h1>
+        </header>
+        
+        <main id="content">
+            <!-- Cargando... -->
+            <div class="loader">Cargando la magia...</div>
+        </main>
+
+        <nav class="bottom-nav">
+            <a href="#" class="nav-item" id="nav-feed">🏠 Feed</a>
+            <a href="#new" class="nav-item" id="nav-new">➕ Crear</a>
+        </nav>
+    </div>
+
+    <!-- Supabase CDN (UMD version) -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- Configuración -->
+    <script src="config.js"></script>
+    <!-- Lógica Principal -->
+    <script src="script.js"></script>
+</body>
+</html>
